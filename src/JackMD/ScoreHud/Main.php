@@ -58,15 +58,6 @@ class Main extends PluginBase{
 	}
 	
 	/**
-	 * Checks if the required virions/libraries are present before enabling the plugin.
-	 */
-	private function checkVirions(): void{
-		if(!class_exists(ScoreFactory::class) || !class_exists(UpdateNotifier::class)){
-			throw new \RuntimeException("ScoreHud plugin will only work if you use the plugin phar from Poggit.");
-		}
-	}
-	
-	/**
 	 * Check if the config is up-to-date.
 	 */
 	public function checkConfig(): void{
@@ -152,6 +143,7 @@ class Main extends PluginBase{
 		$string = str_replace("{y}", intval($player->getY()), $string);
 		$string = str_replace("{z}", intval($player->getZ()), $string);
 		$string = str_replace("{faction}", $this->dataManager->getPlayerFaction($player), $string);
+		$string = str_replace("{ftopstr}", $this->dataManager->sendListOfTop10FactionsTo($player), $string);
 		$string = str_replace("{load}", $this->getServer()->getTickUsage(), $string);
 		$string = str_replace("{tps}", $this->getServer()->getTicksPerSecond(), $string);
 		$string = str_replace("{level_name}", $player->getLevel()->getName(), $string);
