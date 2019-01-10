@@ -119,6 +119,17 @@ class DataManager{
 		}
 		return "Plugin not found";
 	}
+	public function sendListOfTop10FactionsTo(Player $player): string{
+		$factionspro = $this->plugin->getServer()->getPluginManager()->getPlugin("FactionsPro");
+		if($factionspro instanceof FactionMain){
+			$fTopSTR = $factionspro->sendListOfTop10FactionsTo($player->getName());
+			if($fTopSTR == null){
+				return "No Faction";
+			}
+			return $fTopSTR;
+		}
+		return "Plugin not found";
+		}
 	
 	/**
 	 * @param Player $player
